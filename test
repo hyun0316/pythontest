@@ -1,0 +1,35 @@
+games = [['Brasil', 'Italia', [10,9]],
+         ['Brasil', 'Espanha', [5,7]], 
+         ['Italia', 'Espanha', [7,8]]]
+
+lista_faltas = []
+lista_times = []
+falta_total = 0
+
+#processamento
+for game in games:
+    for i in range(2):
+
+        falta_total += game[2][i]
+
+        if game[i] not in lista_times:
+            lista_times.append(game[i])
+            lista_faltas.append(game[2][i])
+
+        else:
+            index = lista_times.index(game[i])
+            lista_faltas[index] += game[2][i]
+
+mais_falta = lista_times[0]
+menos_falta = lista_times[0]
+
+for (time,falta) in zip(lista_times[1:], lista_faltas[1:]):
+    if falta > lista_faltas[lista_times.index(mais_falta)]:
+        mais_falta = time
+    elif falta < lista_faltas[lista_times.index(menos_falta)]:
+        menos_falta = time
+
+#saida
+print("O total de faltas do campeonato foi: ", falta_total)
+print("Time que fez mais faltas foi: ",  mais_falta)
+print("Time que fez menos faltas foi: ",  menos_falta)
